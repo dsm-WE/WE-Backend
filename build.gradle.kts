@@ -1,11 +1,26 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.springframework.boot") version "3.0.4"
-    id("io.spring.dependency-management") version "1.1.0"
-    kotlin("jvm") version "1.7.22"
-    kotlin("plugin.spring") version "1.7.22"
+    id("org.springframework.boot") version "2.6.7"
+    id("io.spring.dependency-management") version "1.0.11.RELEASE"
+    kotlin("jvm") version "1.6.21"
+    kotlin("plugin.spring") version "1.6.21"
+    kotlin("plugin.jpa") version "1.6.21"
 }
+
+
+allOpen {
+    annotation("javax.persistence.Entity")
+    annotation("org.springframework.data.redis.core.RedisHash")
+    annotation("javax.persistence.Embeddable")
+}
+
+noArg {
+    annotation("javax.persistence.Entity")
+    annotation("org.springframework.data.redis.core.RedisHash")
+    annotation("javax.persistence.Embeddable")
+}
+
 
 group = "com.we"
 version = "0.0.1-SNAPSHOT"
@@ -16,9 +31,24 @@ repositories {
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter")
+    compileOnly("org.springframework.boot:spring-boot-autoconfigure")
+    compileOnly("org.springframework.boot:spring-boot-autoconfigure-processor")
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.springframework.security:spring-security-test")
+    //JPA
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa:2.7.5")
+    //MySQL driver
+    implementation("mysql:mysql-connector-java:8.0.31")
+    //Redis
+    implementation("org.springframework.boot:spring-boot-starter-data-redis:2.7.5")
+    //Security
+    implementation("org.springframework.boot:spring-boot-starter-security")
+    //Jwts
+    implementation("io.jsonwebtoken:jjwt:0.9.1")
 }
 
 tasks.withType<KotlinCompile> {
