@@ -5,7 +5,6 @@ import com.we.webackend.domain.post.presentation.dto.request.EditPortfolioReques
 import com.we.webackend.domain.post.presentation.dto.response.MaximumPortfolioResponse
 import com.we.webackend.domain.post.presentation.dto.response.MinimumPortfolioResponse
 import org.springframework.data.domain.Page
-import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
 
 interface PostService {
@@ -15,12 +14,12 @@ interface PostService {
     fun getMaximumPortfolio(portfolioId: Long): MaximumPortfolioResponse
 
 
-    fun createPortfolio(request: CreatePortfolioRequest)
+    fun createPortfolio(request: CreatePortfolioRequest, file: MultipartFile, userEmail: String)
 
-    fun createFile(fileList: List<MultipartFile>)
+    fun editPortfolio(portfolioId: Long, request: EditPortfolioRequest, userEmail: String)
 
-    fun editPortfolio(request: EditPortfolioRequest)
+    fun changePortfolioFile(portfolioId: Long, file: MultipartFile, userEmail: String)
 
-    fun deletePortfolio(portfolioId: String)
+    fun deletePortfolio(portfolioId: Long, userEmail: String)
 
 }

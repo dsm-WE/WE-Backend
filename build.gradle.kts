@@ -49,6 +49,10 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-security")
     //Jwts
     implementation("io.jsonwebtoken:jjwt:0.9.1")
+    //AWS
+    implementation("org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE")
+    //Mailing
+    implementation("org.springframework.boot:spring-boot-starter-mail")
 }
 
 tasks.withType<KotlinCompile> {
